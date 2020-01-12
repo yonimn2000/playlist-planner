@@ -14,12 +14,15 @@ namespace PlaylistPlannerConsole
             planner.LoadMusicFiles(dir);
             Console.Clear();
 
-            Playlist playlist = planner.GetPlaylistOfDuration(new TimeSpan(1, 2, 3));
-            foreach (MusicFile musicFile in playlist.GetMusicFiles())
-                Console.WriteLine(musicFile.Duration + "\t" + musicFile);
-            Console.WriteLine("Total playlist duration: " + playlist.Duration);
-
-            Console.ReadLine();
+            while (true)
+            {
+                Playlist playlist = planner.GetPlaylistOfDuration(new TimeSpan(1, 0, 0, 0));
+                foreach (MusicFile musicFile in playlist.GetMusicFiles())
+                    Console.WriteLine(musicFile.Duration + "\t" + musicFile);
+                Console.WriteLine("Total playlist duration: " + playlist.Duration);
+                playlist.Save("Playlist.m3u", true);
+                Console.ReadLine();
+            }
         }
 
         static void ProgressReported(int i, int total)

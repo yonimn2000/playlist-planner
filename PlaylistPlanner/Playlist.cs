@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace YonatanMankovich.PlaylistPlanner
 {
@@ -35,6 +37,14 @@ namespace YonatanMankovich.PlaylistPlanner
         {
             foreach (MusicFile musicFile in MusicFiles)
                 yield return musicFile;
+        }
+
+        public void Save(string path, bool isRelative)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (MusicFile musicFile in MusicFiles)
+                sb.AppendLine(isRelative ? Path.GetFileName(musicFile.Path) : musicFile.Path);
+            File.WriteAllText(path, sb.ToString());
         }
     }
 }

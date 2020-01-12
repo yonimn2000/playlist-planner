@@ -10,8 +10,13 @@ namespace YonatanMankovich.PlaylistPlanner
         public MusicFile(string path)
         {
             Path = path;
-            Duration = TimeSpan.FromTicks((long)(ulong)Microsoft.WindowsAPICodePack.Shell.
-                ShellObject.FromParsingName(Path).Properties.System.Media.Duration.ValueAsObject);
+            Duration = GetMediaTimespan();
+        }
+
+        private TimeSpan GetMediaTimespan()
+        {
+            return TimeSpan.FromTicks((long)(ulong)Microsoft.WindowsAPICodePack.Shell.
+                            ShellObject.FromParsingName(Path).Properties.System.Media.Duration.ValueAsObject);
         }
 
         public override string ToString()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 
 namespace YonatanMankovich.PlaylistPlanner
 {
@@ -23,22 +22,20 @@ namespace YonatanMankovich.PlaylistPlanner
             }
         }
 
-        public Playlist GetPlaylistOfDuration(TimeSpan duration, uint tries = 1000) // TODO: forgiveness lol
+        public Playlist GetPlaylistOfDuration(TimeSpan duration, TimeSpan forgiveness = default, uint tries = 1000)
         {
-            return GetPlaylistOfDuration(duration, new TimeSpan(0, 0, 1), tries);
-        }
-
-        public Playlist GetPlaylistOfDuration(TimeSpan duration, TimeSpan forgiveness, uint tries = 1000) // TODO: forgiveness lol
-        {
+            TimeSpan maxDuration = duration + forgiveness;
             Playlist[] playlists = new Playlist[tries];
+            int shortestPlaylistIndex = 0;
             for (int i = 0; i < tries; i++)
             {
                 playlists[i] = GetPlaylistOfApproximateDuration(duration);
-                if (playlists[i].Duration <= forgiveness)
+                if (playlists[i].Duration <= maxDuration)
                     return playlists[i];
+                if (playlists[i].Duration < playlists[shortestPlaylistIndex].Duration)
+                    shortestPlaylistIndex = i;
             }
-            playlists = playlists.OrderBy(playlist => playlist.Duration).ToArray();
-            return playlists[0];
+            return playlists[shortestPlaylistIndex];
         }
 
         private Playlist GetPlaylistOfApproximateDuration(TimeSpan duration)
