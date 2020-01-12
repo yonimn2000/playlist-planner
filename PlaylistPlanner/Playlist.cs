@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace YonatanMankovich.PlaylistPlanner
 {
     public class Playlist
     {
-        public uint Duration { get; private set; } = 0;
+        public TimeSpan Duration { get; private set; }
         private List<MusicFile> MusicFiles { get; set; } = new List<MusicFile>();
 
         public void AddMusicFile(MusicFile musicFile)
@@ -25,15 +26,15 @@ namespace YonatanMankovich.PlaylistPlanner
             }
         }
 
-        public int GetCount()
+        public int GetSize()
         {
             return MusicFiles.Count;
         }
 
-        public IEnumerable<string> GetFiles()
+        public IEnumerable<MusicFile> GetMusicFiles()
         {
             foreach (MusicFile musicFile in MusicFiles)
-                yield return musicFile.Path;
+                yield return musicFile;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace YonatanMankovich.PlaylistPlanner
         public ReportProgress ReportProgressDelegate;
 
         private MusicFile[] MusicFiles { get; set; }
-        public Random Random { get; set; } = new Random();
+        private Random Random { get; set; } = new Random();
 
         public void LoadMusicFiles(string directory)
         {
@@ -21,22 +21,30 @@ namespace YonatanMankovich.PlaylistPlanner
                 MusicFiles[i] = new MusicFile(files[i]);
                 ReportProgressDelegate?.Invoke(i + 1, files.Length);
             }
-            MusicFiles = MusicFiles.OrderBy(musicFile => musicFile.Duration).ToArray();
         }
 
-        public Playlist GetPlaylistOfDuration(uint duration, uint tries = 1000)
+        public Playlist GetPlaylistOfDuration(TimeSpan duration, uint tries = 1000) // TODO: forgiveness lol
+        {
+            return GetPlaylistOfDuration(duration, new TimeSpan(0, 0, 1), tries);
+        }
+
+        public Playlist GetPlaylistOfDuration(TimeSpan duration, TimeSpan forgiveness, uint tries = 1000) // TODO: forgiveness lol
         {
             Playlist[] playlists = new Playlist[tries];
             for (int i = 0; i < tries; i++)
+            {
                 playlists[i] = GetPlaylistOfApproximateDuration(duration);
+                if (playlists[i].Duration <= forgiveness)
+                    return playlists[i];
+            }
             playlists = playlists.OrderBy(playlist => playlist.Duration).ToArray();
             return playlists[0];
         }
 
-        private Playlist GetPlaylistOfApproximateDuration(uint duration)
+        private Playlist GetPlaylistOfApproximateDuration(TimeSpan duration)
         {
             Playlist playlist = new Playlist();
-            while (playlist.GetCount() < MusicFiles.Length && playlist.Duration < duration)
+            while (playlist.GetSize() < MusicFiles.Length && playlist.Duration < duration)
                 playlist.AddMusicFile(GetRandomMusicFile());
             return playlist;
         }
