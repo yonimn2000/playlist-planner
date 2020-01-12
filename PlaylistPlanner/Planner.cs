@@ -1,23 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace YonatanMankovich.PlaylistPlanner
 {
     public class Planner
     {
-        public List<MusicFile> MusicFiles { get; set; } = new List<MusicFile>();
+        public delegate void ReportProgress(int fileIndex, int totalFiles);
+        public ReportProgress ReportProgressDelegate;
 
-        public void ReadDirectory(string directory)
+        private MusicFile[] MusicFiles { get; set; }
+        public Random Random { get; set; } = new Random();
+
+        public void LoadMusicFiles(string directory)
         {
-            foreach (string file in Directory.EnumerateFiles(directory, "*.mp3")) // TODO: Add more file extensions.
-                MusicFiles.Add(new MusicFile(file));
+            string[] files = Directory.GetFiles(directory, "*.mp3"); // TODO: Add more file extensions.
+            MusicFiles = new MusicFile[files.Length];
+            for (int i = 0; i < files.Length; i++)
+            {
+                MusicFiles[i] = new MusicFile(files[i]);
+                ReportProgressDelegate?.Invoke(i + 1, files.Length);
+            }
+            MusicFiles = MusicFiles.OrderBy(musicFile => musicFile.Duration).ToArray();
         }
 
-        public IEnumerable<MusicFile> GetFiles()
+        public Playlist GetPlaylistOfDuration(uint duration)
         {
-            foreach (MusicFile musicFile in MusicFiles)
-                yield return musicFile;
+            Playlist playlist = new Playlist();
+            while (playlist.Duration < duration)
+            {
+                playlist.AddMusicFile(GetRandomMusicFile());
+            }
+            return playlist;
+        }
+
+        private MusicFile GetRandomMusicFile()
+        {
+            return MusicFiles[Random.Next(MusicFiles.Length)];
         }
     }
 }

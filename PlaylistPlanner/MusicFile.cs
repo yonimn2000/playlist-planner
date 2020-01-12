@@ -1,7 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Shell;
-using System;
-
-namespace YonatanMankovich.PlaylistPlanner
+﻿namespace YonatanMankovich.PlaylistPlanner
 {
     public class MusicFile
     {
@@ -11,7 +8,8 @@ namespace YonatanMankovich.PlaylistPlanner
         public MusicFile(string path)
         {
             Path = path;
-            Duration = (uint)TimeSpan.FromTicks((long)(ulong)ShellObject.FromParsingName(Path).Properties.System.Media.Duration.ValueAsObject).TotalSeconds;
+            Duration = (uint)System.TimeSpan.FromTicks((long)(ulong)Microsoft.WindowsAPICodePack.Shell.
+                ShellObject.FromParsingName(Path).Properties.System.Media.Duration.ValueAsObject).TotalSeconds;
         }
 
         public override string ToString()
