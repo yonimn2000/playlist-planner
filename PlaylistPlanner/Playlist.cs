@@ -25,6 +25,11 @@ namespace YonatanMankovich.PlaylistPlanner
             }
         }
 
+        public int GetCount()
+        {
+            return MusicFiles.Count;
+        }
+
         public IEnumerable<string> GetFiles()
         {
             foreach (MusicFile musicFile in MusicFiles)

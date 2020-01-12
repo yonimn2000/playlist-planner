@@ -24,13 +24,20 @@ namespace YonatanMankovich.PlaylistPlanner
             MusicFiles = MusicFiles.OrderBy(musicFile => musicFile.Duration).ToArray();
         }
 
-        public Playlist GetPlaylistOfDuration(uint duration)
+        public Playlist GetPlaylistOfDuration(uint duration, uint tries = 1000)
+        {
+            Playlist[] playlists = new Playlist[tries];
+            for (int i = 0; i < tries; i++)
+                playlists[i] = GetPlaylistOfApproximateDuration(duration);
+            playlists = playlists.OrderBy(playlist => playlist.Duration).ToArray();
+            return playlists[0];
+        }
+
+        private Playlist GetPlaylistOfApproximateDuration(uint duration)
         {
             Playlist playlist = new Playlist();
-            while (playlist.Duration < duration)
-            {
+            while (playlist.GetCount() < MusicFiles.Length && playlist.Duration < duration)
                 playlist.AddMusicFile(GetRandomMusicFile());
-            }
             return playlist;
         }
 

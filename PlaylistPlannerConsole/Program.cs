@@ -13,11 +13,20 @@ namespace PlaylistPlannerConsole
             planner.ReportProgressDelegate += ProgressReported;
             planner.LoadMusicFiles(dir);
             Console.Clear();
-            Playlist playlist = planner.GetPlaylistOfDuration(30*60);
+            for (int i = 0; i < 50; i++)
+            {
+                Show(planner);
+            }
+
+            Console.ReadLine();
+        }
+
+        private static void Show(Planner planner)
+        {
+            Playlist playlist = planner.GetPlaylistOfDuration(1000);
             foreach (string file in playlist.GetFiles())
                 Console.WriteLine(file);
             Console.WriteLine("Total duration: " + playlist.Duration);
-            Console.ReadLine();
         }
 
         static void ProgressReported(int i, int total)
