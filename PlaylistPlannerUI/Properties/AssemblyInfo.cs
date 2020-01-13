@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("YonatanMankovich.PlaylistPlannerConsole")]
+[assembly: AssemblyTitle("YonatanMankovich.PlaylistPlannerUI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yonatan Mankovich")]
-[assembly: AssemblyProduct("YonatanMankovich.PlaylistPlannerConsole")]
+[assembly: AssemblyProduct("YonatanMankovich.PlaylistPlannerUI")]
 [assembly: AssemblyCopyright("Copyright ©  2020 Yonatan Mankovich")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c0d3ffe8-a955-45f9-92a3-16a95a734849")]
+[assembly: Guid("06ce1474-1748-43e9-a74b-a25bc0029bc2")]
 
 // Version information for an assembly consists of the following four values:
 //

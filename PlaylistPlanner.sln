@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaylistPlanner", "PlaylistPlanner\PlaylistPlanner.csproj", "{3489B6D4-654D-4BD7-B767-9B777CB6EB27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlaylistPlanner", "PlaylistPlanner\PlaylistPlanner.csproj", "{3489B6D4-654D-4BD7-B767-9B777CB6EB27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaylistPlannerConsole", "PlaylistPlannerConsole\PlaylistPlannerConsole.csproj", "{C0D3FFE8-A955-45F9-92A3-16A95A734849}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaylistPlannerUI", "PlaylistPlannerUI\PlaylistPlannerUI.csproj", "{06CE1474-1748-43E9-A74B-A25BC0029BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3489B6D4-654D-4BD7-B767-9B777CB6EB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3489B6D4-654D-4BD7-B767-9B777CB6EB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3489B6D4-654D-4BD7-B767-9B777CB6EB27}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0D3FFE8-A955-45F9-92A3-16A95A734849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0D3FFE8-A955-45F9-92A3-16A95A734849}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0D3FFE8-A955-45F9-92A3-16A95A734849}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0D3FFE8-A955-45F9-92A3-16A95A734849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06CE1474-1748-43E9-A74B-A25BC0029BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06CE1474-1748-43E9-A74B-A25BC0029BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06CE1474-1748-43E9-A74B-A25BC0029BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06CE1474-1748-43E9-A74B-A25BC0029BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
