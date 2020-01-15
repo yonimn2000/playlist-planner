@@ -52,5 +52,19 @@ namespace YonatanMankovich.PlaylistPlanner
             Save(fileName, false);
             System.Diagnostics.Process.Start(fileName);
         }
+
+        public void Shuffle()
+        {
+            Random random = new Random();
+            int n = GetSize();
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                MusicFile value = MusicFiles[k];
+                MusicFiles[k] = MusicFiles[n];
+                MusicFiles[n] = value;
+            }
+        }
     }
 }

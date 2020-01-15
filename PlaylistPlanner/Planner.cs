@@ -19,12 +19,21 @@ namespace YonatanMankovich.PlaylistPlanner
             foreach (string extension in musicFileExtensions)
                 files.AddRange(Directory.GetFiles(directory, "*." + extension,
                     includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
-            MusicFiles = new MusicFile[files.Count];
+            List<MusicFile> loadedFiles = new List<MusicFile>(files.Count);
             for (int i = 0; i < files.Count; i++)
             {
-                MusicFiles[i] = new MusicFile(files[i]);
+                try
+                {
+                    TimeSpan duration = MusicFile.GetDuration(files[i]);
+                    loadedFiles.Add(new MusicFile(files[i], duration));
+                }
+                catch (MediaDurationNotFoundException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
                 ReportProgressDelegate?.Invoke(i + 1, files.Count);
             }
+            MusicFiles = loadedFiles.ToArray();
         }
 
         public Playlist GetPlaylistOfDuration(TimeSpan duration, TimeSpan forgiveness = default, uint tries = 1000)
@@ -40,6 +49,8 @@ namespace YonatanMankovich.PlaylistPlanner
                 if (playlists[i].Duration < playlists[shortestPlaylistIndex].Duration)
                     shortestPlaylistIndex = i;
             }
+            if (forgiveness != default)
+                throw new UnforgivablePlaylistDurationException(duration, forgiveness);
             return playlists[shortestPlaylistIndex];
         }
 

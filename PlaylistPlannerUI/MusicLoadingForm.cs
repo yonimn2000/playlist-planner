@@ -5,15 +5,19 @@ using YonatanMankovich.PlaylistPlanner;
 
 namespace YonatanMankovich.PlaylistPlannerUI
 {
-    public partial class LoadingForm : Form
+    public partial class MusicLoadingForm : Form
     {
         public Planner PlaylistPlanner { get; } = new Planner();
+        public string Path { get; set; }
+        public bool IncludeSubfolders { get; set; }
 
-        public LoadingForm(string selectedPath)
+        public MusicLoadingForm(string selectedPath, bool includeSubfolders)
         {
             InitializeComponent();
+            Path = selectedPath;
+            IncludeSubfolders = includeSubfolders;
             progressLBL.Text = $"Loading files...";
-            musicLoadBW.RunWorkerAsync(selectedPath);
+            musicLoadBW.RunWorkerAsync();
         }
 
         private void musicLoadBW_DoWork(object sender, DoWorkEventArgs e)
@@ -21,10 +25,10 @@ namespace YonatanMankovich.PlaylistPlannerUI
             PlaylistPlanner.ReportProgressDelegate += (currentIndex, totalFiles) =>
             {
                 musicLoadBW.ReportProgress((int)Math.Round(100 * (double)currentIndex / totalFiles));
-                progressLBL.Invoke(new MethodInvoker(() 
-                    => { progressLBL.Text = $"Loading file {currentIndex} out of {totalFiles}"; }));
+                progressLBL.Invoke(new MethodInvoker(() =>
+                { progressLBL.Text = $"Loading file {currentIndex} out of {totalFiles}"; }));
             };
-            PlaylistPlanner.LoadMusicFiles((string)e.Argument);
+            PlaylistPlanner.LoadMusicFilesFromDirectory(Path, IncludeSubfolders);
         }
 
         private void musicLoadBW_ProgressChanged(object sender, ProgressChangedEventArgs e)

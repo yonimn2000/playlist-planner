@@ -1,6 +1,6 @@
 ﻿namespace YonatanMankovich.PlaylistPlannerUI
 {
-    partial class LoadingForm
+    partial class MusicLoadingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -67,7 +67,7 @@
             this.musicLoadBW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.musicLoadBW_ProgressChanged);
             this.musicLoadBW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.musicLoadBW_RunWorkerCompleted);
             // 
-            // LoadingForm
+            // MusicLoadingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -76,7 +76,9 @@
             this.Controls.Add(this.progressLBL);
             this.Controls.Add(this.loadPB);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "LoadingForm";
+            this.Name = "MusicLoadingForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Please wait...";
             this.ResumeLayout(false);

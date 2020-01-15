@@ -19,26 +19,47 @@ namespace YonatanMankovich.PlaylistPlannerUI
             DialogResult dialogResult = musicFolderBrowserDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
-                LoadingForm loadingForm = new LoadingForm(musicFolderBrowserDialog.SelectedPath);
+                MusicLoadingForm loadingForm = new MusicLoadingForm(musicFolderBrowserDialog.SelectedPath, includeSubfoldersCB.Checked);
                 DialogResult loadingFormDialogResult = loadingForm.ShowDialog(this);
                 if (loadingFormDialogResult == DialogResult.OK)
                 {
                     openFolderLBL.Text = "Current folder: " + musicFolderBrowserDialog.SelectedPath;
                     PlaylistPlanner = loadingForm.PlaylistPlanner;
+                    regeneratePlaylistBTN.PerformClick();
                 }
             }
         }
 
-        private void recalculateBTN_Click(object sender, EventArgs e)
+        private void generateBTN_Click(object sender, EventArgs e)
         {
-            Playlist = PlaylistPlanner.GetPlaylistOfDuration(new TimeSpan(1, 0, 0, 0));
+            Playlist = PlaylistPlanner.GetPlaylistOfDuration(durationPicker.Value.TimeOfDay+TimeSpan.FromDays((double)daysNUD.Value));
+            RefreshFilesLB();
+            totalLengthLBL.Text = $"Total playlist duration: {Playlist.Duration} ({Playlist.GetSize()} songs)";
+        }
+
+        private void RefreshFilesLB()
+        {
+            filesLB.Items.Clear();
             foreach (MusicFile musicFile in Playlist.GetMusicFiles())
                 filesLB.Items.Add(musicFile);
         }
 
         private void saveBTN_Click(object sender, EventArgs e)
         {
-            Playlist.Save("Playlist.m3u", true);
+            DialogResult saveResult = savePlaylistDialog.ShowDialog(this);
+            if(saveResult == DialogResult.OK)
+               Playlist.Save(savePlaylistDialog.FileName, true);
+        }
+
+        private void playPlaylistBTN_Click(object sender, EventArgs e)
+        {
+            Playlist.Play();
+        }
+
+        private void shufflePlaylistBTN_Click(object sender, EventArgs e)
+        {
+            Playlist.Shuffle();
+            RefreshFilesLB();
         }
     }
 }

@@ -4,19 +4,22 @@ namespace YonatanMankovich.PlaylistPlanner
 {
     public class MusicFile
     {
-        public TimeSpan Duration { get; }
         public string Path { get; }
+        public TimeSpan Duration { get; }
 
-        public MusicFile(string path)
+        public MusicFile(string path, TimeSpan duration)
         {
             Path = path;
-            Duration = GetMediaTimespan();
+            Duration = duration;
         }
 
-        private TimeSpan GetMediaTimespan()
+        public static TimeSpan GetDuration(string path)
         {
-            return TimeSpan.FromTicks((long)(ulong)Microsoft.WindowsAPICodePack.Shell.
-                            ShellObject.FromParsingName(Path).Properties.System.Media.Duration.ValueAsObject);
+            object duration = Microsoft.WindowsAPICodePack.Shell.
+                            ShellObject.FromParsingName(path).Properties.System.Media.Duration.ValueAsObject;
+            if (duration == null)
+                throw new MediaDurationNotFoundException(path);
+            return TimeSpan.FromTicks((long)(ulong)duration);
         }
 
         public override string ToString()
