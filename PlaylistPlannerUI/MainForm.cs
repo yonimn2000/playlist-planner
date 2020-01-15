@@ -14,7 +14,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
             InitializeComponent();
         }
 
-        private void openFolderBTN_Click(object sender, EventArgs e)
+        private void OpenFolder()
         {
             DialogResult dialogResult = musicFolderBrowserDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
@@ -23,7 +23,8 @@ namespace YonatanMankovich.PlaylistPlannerUI
                 DialogResult loadingFormDialogResult = loadingForm.ShowDialog(this);
                 if (loadingFormDialogResult == DialogResult.OK)
                 {
-                    openFolderLBL.Text = "Current folder: " + musicFolderBrowserDialog.SelectedPath;
+                    playlistGB.Enabled = true;
+                    openFolderLLBL.Text = musicFolderBrowserDialog.SelectedPath;
                     PlaylistPlanner = loadingForm.PlaylistPlanner;
                     regeneratePlaylistBTN.PerformClick();
                 }
@@ -60,6 +61,11 @@ namespace YonatanMankovich.PlaylistPlannerUI
         {
             Playlist.Shuffle();
             RefreshFilesLB();
+        }
+
+        private void openFolderLLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFolder();
         }
     }
 }
