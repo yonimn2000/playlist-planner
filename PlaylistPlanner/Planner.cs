@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace YonatanMankovich.PlaylistPlanner
@@ -10,15 +11,19 @@ namespace YonatanMankovich.PlaylistPlanner
 
         private MusicFile[] MusicFiles { get; set; }
         private Random Random { get; set; } = new Random();
+        private static readonly string[] musicFileExtensions = { "mp3", "ogg", "aac", "wma", "flac", "wav" };
 
-        public void LoadMusicFiles(string directory)
+        public void LoadMusicFilesFromDirectory(string directory, bool includeSubfolders)
         {
-            string[] files = Directory.GetFiles(directory, "*.mp3"); // TODO: Add more file extensions.
-            MusicFiles = new MusicFile[files.Length];
-            for (int i = 0; i < files.Length; i++)
+            List<string> files = new List<string>();
+            foreach (string extension in musicFileExtensions)
+                files.AddRange(Directory.GetFiles(directory, "*." + extension,
+                    includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
+            MusicFiles = new MusicFile[files.Count];
+            for (int i = 0; i < files.Count; i++)
             {
                 MusicFiles[i] = new MusicFile(files[i]);
-                ReportProgressDelegate?.Invoke(i + 1, files.Length);
+                ReportProgressDelegate?.Invoke(i + 1, files.Count);
             }
         }
 
@@ -41,14 +46,14 @@ namespace YonatanMankovich.PlaylistPlanner
         private Playlist GetPlaylistOfApproximateDuration(TimeSpan duration)
         {
             Playlist playlist = new Playlist();
+            List<MusicFile> musicFilesList = new List<MusicFile>(MusicFiles);
             while (playlist.GetSize() < MusicFiles.Length && playlist.Duration < duration)
-                playlist.AddMusicFile(GetRandomMusicFile());
+            {
+                int randomIndex = Random.Next(musicFilesList.Count);
+                playlist.AddMusicFile(musicFilesList[randomIndex]);
+                musicFilesList.RemoveAt(randomIndex);
+            }
             return playlist;
-        }
-
-        private MusicFile GetRandomMusicFile()
-        {
-            return MusicFiles[Random.Next(MusicFiles.Length)];
         }
     }
 }

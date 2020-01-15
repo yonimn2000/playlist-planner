@@ -12,11 +12,8 @@ namespace YonatanMankovich.PlaylistPlanner
 
         public void AddMusicFile(MusicFile musicFile)
         {
-            if (!MusicFiles.Contains(musicFile))
-            {
-                MusicFiles.Add(musicFile);
-                Duration += musicFile.Duration;
-            }
+            MusicFiles.Add(musicFile);
+            Duration += musicFile.Duration;
         }
 
         public void RemoveMusicFile(MusicFile musicFile)
