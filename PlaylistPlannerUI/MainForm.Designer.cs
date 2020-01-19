@@ -41,17 +41,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.durationGB = new System.Windows.Forms.GroupBox();
             this.playlistGB = new System.Windows.Forms.GroupBox();
+            this.buttonsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.shufflePlaylistBTN = new System.Windows.Forms.Button();
             this.includeSubfoldersCB = new System.Windows.Forms.CheckBox();
             this.filesGB = new System.Windows.Forms.GroupBox();
-            this.openFolderLLBL = new System.Windows.Forms.LinkLabel();
-            this.buttonsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.openFolderLLBL = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.daysNUD)).BeginInit();
             this.durationGB.SuspendLayout();
             this.playlistGB.SuspendLayout();
-            this.filesGB.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
+            this.filesGB.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,6 +191,26 @@
             this.playlistGB.TabStop = false;
             this.playlistGB.Text = "Generated playlist";
             // 
+            // buttonsPanel
+            // 
+            this.buttonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonsPanel.ColumnCount = 4;
+            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.buttonsPanel.Controls.Add(this.regeneratePlaylistBTN, 0, 0);
+            this.buttonsPanel.Controls.Add(this.shufflePlaylistBTN, 1, 0);
+            this.buttonsPanel.Controls.Add(this.savePlaylistBTN, 2, 0);
+            this.buttonsPanel.Controls.Add(this.playPlaylistBTN, 3, 0);
+            this.buttonsPanel.Location = new System.Drawing.Point(6, 250);
+            this.buttonsPanel.Name = "buttonsPanel";
+            this.buttonsPanel.RowCount = 1;
+            this.buttonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.buttonsPanel.Size = new System.Drawing.Size(340, 30);
+            this.buttonsPanel.TabIndex = 21;
+            // 
             // shufflePlaylistBTN
             // 
             this.shufflePlaylistBTN.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -225,38 +245,6 @@
             this.filesGB.TabStop = false;
             this.filesGB.Text = "Files";
             // 
-            // openFolderLLBL
-            // 
-            this.openFolderLLBL.AutoSize = true;
-            this.openFolderLLBL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.openFolderLLBL.Location = new System.Drawing.Point(83, 0);
-            this.openFolderLLBL.Name = "openFolderLLBL";
-            this.openFolderLLBL.Size = new System.Drawing.Size(127, 38);
-            this.openFolderLLBL.TabIndex = 20;
-            this.openFolderLLBL.TabStop = true;
-            this.openFolderLLBL.Text = "Open folder";
-            this.openFolderLLBL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openFolderLLBL_LinkClicked);
-            // 
-            // buttonsPanel
-            // 
-            this.buttonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonsPanel.ColumnCount = 4;
-            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.buttonsPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.buttonsPanel.Controls.Add(this.regeneratePlaylistBTN, 0, 0);
-            this.buttonsPanel.Controls.Add(this.shufflePlaylistBTN, 1, 0);
-            this.buttonsPanel.Controls.Add(this.savePlaylistBTN, 2, 0);
-            this.buttonsPanel.Controls.Add(this.playPlaylistBTN, 3, 0);
-            this.buttonsPanel.Location = new System.Drawing.Point(6, 250);
-            this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.RowCount = 1;
-            this.buttonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.buttonsPanel.Size = new System.Drawing.Size(340, 30);
-            this.buttonsPanel.TabIndex = 21;
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -272,6 +260,18 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(213, 38);
             this.tableLayoutPanel2.TabIndex = 21;
             // 
+            // openFolderLLBL
+            // 
+            this.openFolderLLBL.AutoSize = true;
+            this.openFolderLLBL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.openFolderLLBL.Location = new System.Drawing.Point(83, 0);
+            this.openFolderLLBL.Name = "openFolderLLBL";
+            this.openFolderLLBL.Size = new System.Drawing.Size(127, 38);
+            this.openFolderLLBL.TabIndex = 20;
+            this.openFolderLLBL.TabStop = true;
+            this.openFolderLLBL.Text = "Open folder";
+            this.openFolderLLBL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openFolderLLBL_LinkClicked);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,14 +281,14 @@
             this.Controls.Add(this.playlistGB);
             this.Controls.Add(this.durationGB);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Playlist Planner";
             ((System.ComponentModel.ISupportInitialize)(this.daysNUD)).EndInit();
             this.durationGB.ResumeLayout(false);
             this.durationGB.PerformLayout();
             this.playlistGB.ResumeLayout(false);
             this.playlistGB.PerformLayout();
-            this.filesGB.ResumeLayout(false);
             this.buttonsPanel.ResumeLayout(false);
+            this.filesGB.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);

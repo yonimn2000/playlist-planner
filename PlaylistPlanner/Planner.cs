@@ -13,27 +13,35 @@ namespace YonatanMankovich.PlaylistPlanner
         private Random Random { get; set; } = new Random();
         private static readonly string[] musicFileExtensions = { "mp3", "ogg", "aac", "wma", "flac", "wav" };
 
-        public void LoadMusicFilesFromDirectory(string directory, bool includeSubfolders)
+        public string[] LoadMusicFilesFromDirectory(string directory, bool includeSubfolders)
         {
+            List<string> unknownDurationFiles = new List<string>();
             List<string> files = new List<string>();
             foreach (string extension in musicFileExtensions)
                 files.AddRange(Directory.GetFiles(directory, "*." + extension,
                     includeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
             List<MusicFile> loadedFiles = new List<MusicFile>(files.Count);
-            for (int i = 0; i < files.Count; i++)
+            //for (int i = 0; i < files.Count; i++)
+            int currentFile = 1;
+            System.Threading.Tasks.Parallel.ForEach(files, (file) =>
             {
                 try
                 {
-                    TimeSpan duration = MusicFile.GetDuration(files[i]);
-                    loadedFiles.Add(new MusicFile(files[i], duration));
+                    TimeSpan duration = MusicFile.GetDuration(file);
+                    loadedFiles.Add(new MusicFile(file, duration));
                 }
                 catch (MediaDurationNotFoundException e)
                 {
+                    unknownDurationFiles.Add(e.PathToMedia);
+                }
+                catch (Exception e)
+                {
                     System.Diagnostics.Debug.WriteLine(e.Message);
                 }
-                ReportProgressDelegate?.Invoke(i + 1, files.Count);
-            }
+                ReportProgressDelegate?.Invoke(currentFile++, files.Count);
+            });
             MusicFiles = loadedFiles.ToArray();
+            return unknownDurationFiles.ToArray();
         }
 
         public Playlist GetPlaylistOfDuration(TimeSpan duration, TimeSpan forgiveness = default, uint tries = 1000)
@@ -65,6 +73,11 @@ namespace YonatanMankovich.PlaylistPlanner
                 musicFilesList.RemoveAt(randomIndex);
             }
             return playlist;
+        }
+
+        public int GetLoadedFilesCount()
+        {
+            return MusicFiles.Length;
         }
     }
 }

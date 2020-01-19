@@ -14,7 +14,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
             InitializeComponent();
         }
 
-        private void OpenFolder()
+        private void openFolderLLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             DialogResult dialogResult = musicFolderBrowserDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
@@ -33,7 +33,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
 
         private void generateBTN_Click(object sender, EventArgs e)
         {
-            Playlist = PlaylistPlanner.GetPlaylistOfDuration(durationPicker.Value.TimeOfDay+TimeSpan.FromDays((double)daysNUD.Value));
+            Playlist = PlaylistPlanner.GetPlaylistOfDuration(durationPicker.Value.TimeOfDay + TimeSpan.FromDays((double)daysNUD.Value));
             RefreshFilesLB();
             totalLengthLBL.Text = $"Total playlist duration: {Playlist.Duration} ({Playlist.GetSize()} songs)";
         }
@@ -48,8 +48,8 @@ namespace YonatanMankovich.PlaylistPlannerUI
         private void saveBTN_Click(object sender, EventArgs e)
         {
             DialogResult saveResult = savePlaylistDialog.ShowDialog(this);
-            if(saveResult == DialogResult.OK)
-               Playlist.Save(savePlaylistDialog.FileName, true);
+            if (saveResult == DialogResult.OK)
+                Playlist.Save(savePlaylistDialog.FileName, true);
         }
 
         private void playPlaylistBTN_Click(object sender, EventArgs e)
@@ -61,11 +61,6 @@ namespace YonatanMankovich.PlaylistPlannerUI
         {
             Playlist.Shuffle();
             RefreshFilesLB();
-        }
-
-        private void openFolderLLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            OpenFolder();
         }
     }
 }

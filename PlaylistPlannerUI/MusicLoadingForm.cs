@@ -25,10 +25,15 @@ namespace YonatanMankovich.PlaylistPlannerUI
             PlaylistPlanner.ReportProgressDelegate += (currentIndex, totalFiles) =>
             {
                 musicLoadBW.ReportProgress((int)Math.Round(100 * (double)currentIndex / totalFiles));
-                progressLBL.Invoke(new MethodInvoker(() =>
-                { progressLBL.Text = $"Loading file {currentIndex} out of {totalFiles}"; }));
+                if (IsHandleCreated)
+                    progressLBL.Invoke(new MethodInvoker(() =>
+                    { progressLBL.Text = $"Loading file {currentIndex} out of {totalFiles}"; }));
             };
-            PlaylistPlanner.LoadMusicFilesFromDirectory(Path, IncludeSubfolders);
+            string[] unknownDurationFiles = PlaylistPlanner.LoadMusicFilesFromDirectory(Path, IncludeSubfolders);
+            if (unknownDurationFiles.Length > 0)
+                MessageBox.Show($"Unable to determine the duration of the following " +
+                    $"{unknownDurationFiles.Length} media file{(unknownDurationFiles.Length == 1 ? "" : "s")}:\n\n" +
+                    string.Join("\n\n", unknownDurationFiles), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void musicLoadBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
