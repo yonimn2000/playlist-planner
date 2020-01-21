@@ -33,7 +33,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
 
         private void generateBTN_Click(object sender, EventArgs e)
         {
-            Playlist = PlaylistPlanner.GetPlaylistOfDuration(durationPicker.Value.TimeOfDay + TimeSpan.FromDays((double)daysNUD.Value));
+            Playlist = PlaylistPlanner.GetClosestPlaylistOfDuration(durationPicker.Value.TimeOfDay + TimeSpan.FromDays((double)daysNUD.Value));
             RefreshFilesLB();
             totalLengthLBL.Text = $"Total playlist duration: {Playlist.Duration} ({Playlist.GetSize()} songs)";
         }
