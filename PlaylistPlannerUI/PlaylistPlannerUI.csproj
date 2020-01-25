@@ -7,7 +7,7 @@
     <ProjectGuid>{06CE1474-1748-43E9-A74B-A25BC0029BC2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>YonatanMankovich.PlaylistPlannerUI</RootNamespace>
-    <AssemblyName>YonatanMankovich.PlaylistPlannerUI</AssemblyName>
+    <AssemblyName>Playlist Planner</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,6 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -94,6 +97,9 @@
       <Project>{3489b6d4-654d-4bd7-b767-9b777cb6eb27}</Project>
       <Name>PlaylistPlanner</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

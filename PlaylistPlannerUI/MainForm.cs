@@ -33,9 +33,23 @@ namespace YonatanMankovich.PlaylistPlannerUI
 
         private void generateBTN_Click(object sender, EventArgs e)
         {
-            Playlist = PlaylistPlanner.GetClosestPlaylistOfDuration(durationPicker.Value.TimeOfDay + TimeSpan.FromDays((double)daysNUD.Value));
-            RefreshFilesLB();
-            totalLengthLBL.Text = $"Total playlist duration: {Playlist.Duration} ({Playlist.GetSize()} songs)";
+            PerformLongActionForPlaylistGB(() =>
+            {
+                Playlist = PlaylistPlanner.GetClosestPlaylistOfDuration(durationPicker.Value.TimeOfDay + TimeSpan.FromDays((double)daysNUD.Value));
+                RefreshFilesLB();
+                totalLengthLBL.Text = $"Total playlist duration: " +
+                    $"{TimeSpan.FromSeconds(Math.Round(Playlist.Duration.TotalSeconds))} ({Playlist.GetSize()} songs)";
+                filesGB.Text = $"Files ({PlaylistPlanner.GetCountOfLoadedFiles()} loaded)";
+            });
+        }
+
+        private void PerformLongActionForPlaylistGB(Action action)
+        {
+            playlistGB.Enabled = false;
+            playlistGB.Cursor = Cursors.WaitCursor;
+            action();
+            playlistGB.Cursor = Cursors.Default;
+            playlistGB.Enabled = true;
         }
 
         private void RefreshFilesLB()
@@ -49,7 +63,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
         {
             DialogResult saveResult = savePlaylistDialog.ShowDialog(this);
             if (saveResult == DialogResult.OK)
-                Playlist.Save(savePlaylistDialog.FileName, true);
+                PerformLongActionForPlaylistGB(() => { Playlist.Save(savePlaylistDialog.FileName, true); });
         }
 
         private void playPlaylistBTN_Click(object sender, EventArgs e)
@@ -59,8 +73,11 @@ namespace YonatanMankovich.PlaylistPlannerUI
 
         private void shufflePlaylistBTN_Click(object sender, EventArgs e)
         {
-            Playlist.Shuffle();
-            RefreshFilesLB();
+            PerformLongActionForPlaylistGB(() =>
+            {
+                Playlist.Shuffle();
+                RefreshFilesLB();
+            });
         }
     }
 }

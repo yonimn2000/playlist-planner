@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.musicFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.filesLB = new System.Windows.Forms.ListBox();
             this.regeneratePlaylistBTN = new System.Windows.Forms.Button();
@@ -68,7 +69,7 @@
             this.filesLB.FormattingEnabled = true;
             this.filesLB.Location = new System.Drawing.Point(6, 19);
             this.filesLB.Name = "filesLB";
-            this.filesLB.Size = new System.Drawing.Size(340, 212);
+            this.filesLB.Size = new System.Drawing.Size(349, 199);
             this.filesLB.TabIndex = 4;
             // 
             // regeneratePlaylistBTN
@@ -76,7 +77,7 @@
             this.regeneratePlaylistBTN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.regeneratePlaylistBTN.Location = new System.Drawing.Point(3, 3);
             this.regeneratePlaylistBTN.Name = "regeneratePlaylistBTN";
-            this.regeneratePlaylistBTN.Size = new System.Drawing.Size(79, 24);
+            this.regeneratePlaylistBTN.Size = new System.Drawing.Size(81, 24);
             this.regeneratePlaylistBTN.TabIndex = 5;
             this.regeneratePlaylistBTN.Text = "Regenerate";
             this.regeneratePlaylistBTN.UseVisualStyleBackColor = true;
@@ -85,9 +86,9 @@
             // savePlaylistBTN
             // 
             this.savePlaylistBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.savePlaylistBTN.Location = new System.Drawing.Point(173, 3);
+            this.savePlaylistBTN.Location = new System.Drawing.Point(177, 3);
             this.savePlaylistBTN.Name = "savePlaylistBTN";
-            this.savePlaylistBTN.Size = new System.Drawing.Size(79, 24);
+            this.savePlaylistBTN.Size = new System.Drawing.Size(81, 24);
             this.savePlaylistBTN.TabIndex = 6;
             this.savePlaylistBTN.Text = "Save";
             this.savePlaylistBTN.UseVisualStyleBackColor = true;
@@ -97,7 +98,7 @@
             // 
             this.totalLengthLBL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.totalLengthLBL.AutoSize = true;
-            this.totalLengthLBL.Location = new System.Drawing.Point(5, 234);
+            this.totalLengthLBL.Location = new System.Drawing.Point(5, 224);
             this.totalLengthLBL.Name = "totalLengthLBL";
             this.totalLengthLBL.Size = new System.Drawing.Size(112, 13);
             this.totalLengthLBL.TabIndex = 7;
@@ -106,9 +107,9 @@
             // playPlaylistBTN
             // 
             this.playPlaylistBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playPlaylistBTN.Location = new System.Drawing.Point(258, 3);
+            this.playPlaylistBTN.Location = new System.Drawing.Point(264, 3);
             this.playPlaylistBTN.Name = "playPlaylistBTN";
-            this.playPlaylistBTN.Size = new System.Drawing.Size(79, 24);
+            this.playPlaylistBTN.Size = new System.Drawing.Size(82, 24);
             this.playPlaylistBTN.TabIndex = 8;
             this.playPlaylistBTN.Text = "Play";
             this.playPlaylistBTN.UseVisualStyleBackColor = true;
@@ -186,7 +187,7 @@
             this.playlistGB.Enabled = false;
             this.playlistGB.Location = new System.Drawing.Point(12, 75);
             this.playlistGB.Name = "playlistGB";
-            this.playlistGB.Size = new System.Drawing.Size(352, 287);
+            this.playlistGB.Size = new System.Drawing.Size(361, 277);
             this.playlistGB.TabIndex = 18;
             this.playlistGB.TabStop = false;
             this.playlistGB.Text = "Generated playlist";
@@ -204,19 +205,19 @@
             this.buttonsPanel.Controls.Add(this.shufflePlaylistBTN, 1, 0);
             this.buttonsPanel.Controls.Add(this.savePlaylistBTN, 2, 0);
             this.buttonsPanel.Controls.Add(this.playPlaylistBTN, 3, 0);
-            this.buttonsPanel.Location = new System.Drawing.Point(6, 250);
+            this.buttonsPanel.Location = new System.Drawing.Point(6, 240);
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.RowCount = 1;
             this.buttonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.buttonsPanel.Size = new System.Drawing.Size(340, 30);
+            this.buttonsPanel.Size = new System.Drawing.Size(349, 30);
             this.buttonsPanel.TabIndex = 21;
             // 
             // shufflePlaylistBTN
             // 
             this.shufflePlaylistBTN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.shufflePlaylistBTN.Location = new System.Drawing.Point(88, 3);
+            this.shufflePlaylistBTN.Location = new System.Drawing.Point(90, 3);
             this.shufflePlaylistBTN.Name = "shufflePlaylistBTN";
-            this.shufflePlaylistBTN.Size = new System.Drawing.Size(79, 24);
+            this.shufflePlaylistBTN.Size = new System.Drawing.Size(81, 24);
             this.shufflePlaylistBTN.TabIndex = 9;
             this.shufflePlaylistBTN.Text = "Shuffle";
             this.shufflePlaylistBTN.UseVisualStyleBackColor = true;
@@ -240,7 +241,7 @@
             this.filesGB.Controls.Add(this.tableLayoutPanel2);
             this.filesGB.Location = new System.Drawing.Point(145, 12);
             this.filesGB.Name = "filesGB";
-            this.filesGB.Size = new System.Drawing.Size(219, 57);
+            this.filesGB.Size = new System.Drawing.Size(228, 57);
             this.filesGB.TabIndex = 20;
             this.filesGB.TabStop = false;
             this.filesGB.Text = "Files";
@@ -257,7 +258,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(213, 38);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(222, 38);
             this.tableLayoutPanel2.TabIndex = 21;
             // 
             // openFolderLLBL
@@ -266,7 +267,7 @@
             this.openFolderLLBL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.openFolderLLBL.Location = new System.Drawing.Point(83, 0);
             this.openFolderLLBL.Name = "openFolderLLBL";
-            this.openFolderLLBL.Size = new System.Drawing.Size(127, 38);
+            this.openFolderLLBL.Size = new System.Drawing.Size(136, 38);
             this.openFolderLLBL.TabIndex = 20;
             this.openFolderLLBL.TabStop = true;
             this.openFolderLLBL.Text = "Open folder";
@@ -276,10 +277,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 371);
+            this.ClientSize = new System.Drawing.Size(384, 361);
             this.Controls.Add(this.filesGB);
             this.Controls.Add(this.playlistGB);
             this.Controls.Add(this.durationGB);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(300, 250);
             this.Name = "MainForm";
             this.Text = "Playlist Planner";
             ((System.ComponentModel.ISupportInitialize)(this.daysNUD)).EndInit();
