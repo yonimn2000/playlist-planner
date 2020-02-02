@@ -19,7 +19,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
             DialogResult dialogResult = musicFolderBrowserDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
-                MusicLoadingForm loadingForm = new MusicLoadingForm(musicFolderBrowserDialog.SelectedPath, includeSubfoldersCB.Checked);
+                MusicLoadingForm loadingForm = new MusicLoadingForm(musicFolderBrowserDialog.SelectedPath);
                 DialogResult loadingFormDialogResult = loadingForm.ShowDialog(this);
                 if (loadingFormDialogResult == DialogResult.OK)
                 {
@@ -27,6 +27,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
                     openFolderLLBL.Text = musicFolderBrowserDialog.SelectedPath;
                     PlaylistPlanner = loadingForm.PlaylistPlanner;
                     regeneratePlaylistBTN.PerformClick();
+                    filesInfoLBL.Text = $"{PlaylistPlanner.GetCountOfLoadedFiles()}";
                 }
             }
         }
@@ -39,7 +40,6 @@ namespace YonatanMankovich.PlaylistPlannerUI
                 RefreshFilesLB();
                 totalLengthLBL.Text = $"Total playlist duration: " +
                     $"{TimeSpan.FromSeconds(Math.Round(Playlist.Duration.TotalSeconds))} ({Playlist.GetSize()} songs)";
-                filesGB.Text = $"Files ({PlaylistPlanner.GetCountOfLoadedFiles()} loaded)";
             });
         }
 

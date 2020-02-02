@@ -9,13 +9,11 @@ namespace YonatanMankovich.PlaylistPlannerUI
     {
         public Planner PlaylistPlanner { get; } = new Planner();
         public string Path { get; set; }
-        public bool IncludeSubfolders { get; set; }
 
-        public MusicLoadingForm(string selectedPath, bool includeSubfolders)
+        public MusicLoadingForm(string selectedPath)
         {
             InitializeComponent();
             Path = selectedPath;
-            IncludeSubfolders = includeSubfolders;
             progressLBL.Text = $"Loading files...";
             musicLoadBW.RunWorkerAsync();
         }
@@ -29,7 +27,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
                     progressLBL.Invoke(new MethodInvoker(() =>
                     { progressLBL.Text = $"Loading file {currentIndex} out of {totalFiles}"; }));
             };
-            string[] unknownDurationFiles = PlaylistPlanner.AddMusicFilesFromDirectory(Path, IncludeSubfolders);
+            string[] unknownDurationFiles = PlaylistPlanner.AddMusicFilesFromDirectory(Path);
             if (unknownDurationFiles.Length > 0)
                 Invoke(new MethodInvoker(() =>
                 {

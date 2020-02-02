@@ -33,7 +33,7 @@ namespace YonatanMankovich.PlaylistPlanner
         /// </summary>
         /// <param name="directory">A path to a folder with music files.</param>
         /// <param name="includeSubfolders">Specifies whether the program should include subfolders with music files.</param>
-        public string[] AddMusicFilesFromDirectory(string directory, bool includeSubfolders)
+        public string[] AddMusicFilesFromDirectory(string directory, bool includeSubfolders = true)
         {
             List<string> files = new List<string>();
             foreach (string extension in musicFileExtensions)

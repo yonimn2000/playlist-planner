@@ -44,16 +44,14 @@
             this.playlistGB = new System.Windows.Forms.GroupBox();
             this.buttonsPanel = new System.Windows.Forms.TableLayoutPanel();
             this.shufflePlaylistBTN = new System.Windows.Forms.Button();
-            this.includeSubfoldersCB = new System.Windows.Forms.CheckBox();
             this.filesGB = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.openFolderLLBL = new System.Windows.Forms.LinkLabel();
+            this.filesInfoLBL = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.daysNUD)).BeginInit();
             this.durationGB.SuspendLayout();
             this.playlistGB.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
             this.filesGB.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // musicFolderBrowserDialog
@@ -223,22 +221,12 @@
             this.shufflePlaylistBTN.UseVisualStyleBackColor = true;
             this.shufflePlaylistBTN.Click += new System.EventHandler(this.shufflePlaylistBTN_Click);
             // 
-            // includeSubfoldersCB
-            // 
-            this.includeSubfoldersCB.AutoSize = true;
-            this.includeSubfoldersCB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.includeSubfoldersCB.Location = new System.Drawing.Point(3, 3);
-            this.includeSubfoldersCB.Name = "includeSubfoldersCB";
-            this.includeSubfoldersCB.Size = new System.Drawing.Size(74, 32);
-            this.includeSubfoldersCB.TabIndex = 19;
-            this.includeSubfoldersCB.Text = "Include\r\nsubfolders";
-            this.includeSubfoldersCB.UseVisualStyleBackColor = true;
-            // 
             // filesGB
             // 
             this.filesGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.filesGB.Controls.Add(this.tableLayoutPanel2);
+            this.filesGB.Controls.Add(this.filesInfoLBL);
+            this.filesGB.Controls.Add(this.openFolderLLBL);
             this.filesGB.Location = new System.Drawing.Point(145, 12);
             this.filesGB.Name = "filesGB";
             this.filesGB.Size = new System.Drawing.Size(228, 57);
@@ -246,32 +234,25 @@
             this.filesGB.TabStop = false;
             this.filesGB.Text = "Files";
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.openFolderLLBL, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.includeSubfoldersCB, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(222, 38);
-            this.tableLayoutPanel2.TabIndex = 21;
-            // 
             // openFolderLLBL
             // 
             this.openFolderLLBL.AutoSize = true;
-            this.openFolderLLBL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.openFolderLLBL.Location = new System.Drawing.Point(83, 0);
+            this.openFolderLLBL.Location = new System.Drawing.Point(6, 16);
             this.openFolderLLBL.Name = "openFolderLLBL";
-            this.openFolderLLBL.Size = new System.Drawing.Size(136, 38);
+            this.openFolderLLBL.Size = new System.Drawing.Size(62, 13);
             this.openFolderLLBL.TabIndex = 20;
             this.openFolderLLBL.TabStop = true;
             this.openFolderLLBL.Text = "Open folder";
             this.openFolderLLBL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openFolderLLBL_LinkClicked);
+            // 
+            // filesInfoLBL
+            // 
+            this.filesInfoLBL.AutoSize = true;
+            this.filesInfoLBL.Location = new System.Drawing.Point(7, 33);
+            this.filesInfoLBL.Name = "filesInfoLBL";
+            this.filesInfoLBL.Size = new System.Drawing.Size(77, 13);
+            this.filesInfoLBL.TabIndex = 21;
+            this.filesInfoLBL.Text = "No files loaded";
             // 
             // MainForm
             // 
@@ -292,8 +273,7 @@
             this.playlistGB.PerformLayout();
             this.buttonsPanel.ResumeLayout(false);
             this.filesGB.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.filesGB.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -313,11 +293,10 @@
         private System.Windows.Forms.GroupBox durationGB;
         private System.Windows.Forms.GroupBox playlistGB;
         private System.Windows.Forms.Button shufflePlaylistBTN;
-        private System.Windows.Forms.CheckBox includeSubfoldersCB;
         private System.Windows.Forms.GroupBox filesGB;
         private System.Windows.Forms.LinkLabel openFolderLLBL;
         private System.Windows.Forms.TableLayoutPanel buttonsPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label filesInfoLBL;
     }
 }
 
