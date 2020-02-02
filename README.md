@@ -4,7 +4,7 @@ A simple tool to create music playlists of exact durations.
 
 ## Screenshot
 
-![screenshot](media/screenshot.png)
+![screenshot](media/screenshot0.png)
 
 ## Optional Command Line Arguments
 
