@@ -9,9 +9,21 @@ namespace YonatanMankovich.PlaylistPlannerUI
         private Planner PlaylistPlanner { get; set; }
         private Playlist Playlist { get; set; }
 
-        public MainForm()
+        public MainForm(string[] args)
         {
             InitializeComponent();
+            if (args.Length >= 2) // arg1 = folder path; arg2 = play until DateTime; arg3 = seconds offset
+            {
+                Show();
+                LoadFilesIntoPlanner(args[0]);
+                TimeSpan duration = DateTime.Parse(args[1]) - DateTime.Now;
+                if (args.Length >= 3)
+                    duration += TimeSpan.FromSeconds(int.Parse(args[2]));
+                daysNUD.Value = duration.Days;
+                durationPicker.Value = new DateTime(2000, 1, 1, duration.Hours, duration.Minutes, duration.Seconds);
+                regeneratePlaylistBTN.PerformClick();
+                playPlaylistBTN.PerformClick();
+            }
         }
 
         private void openFolderLLBL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -19,19 +31,23 @@ namespace YonatanMankovich.PlaylistPlannerUI
             DialogResult dialogResult = musicFolderBrowserDialog.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
-                MusicLoadingForm loadingForm = new MusicLoadingForm(musicFolderBrowserDialog.SelectedPath);
-                DialogResult loadingFormDialogResult = loadingForm.ShowDialog(this);
-                if (loadingFormDialogResult == DialogResult.OK)
-                {
-                    playlistGB.Enabled = true;
-                    openFolderLLBL.Text = musicFolderBrowserDialog.SelectedPath;
-                    PlaylistPlanner = loadingForm.PlaylistPlanner;
-                    regeneratePlaylistBTN.PerformClick();
+                LoadFilesIntoPlanner(musicFolderBrowserDialog.SelectedPath);
+                regeneratePlaylistBTN.PerformClick();
+            }
+        }
 
-                    filesInfoLBL.Text = $"{PlaylistPlanner.GetCountOfLoadedFiles()} files | Min: " +
-                        RoundTimeSpanToSeconds(PlaylistPlanner.MinimumPlaylistDuration) +
-                        $" | Max: " + RoundTimeSpanToSeconds(PlaylistPlanner.MaximumPlaylistDuration);
-                }
+        private void LoadFilesIntoPlanner(string path)
+        {
+            MusicLoadingForm loadingForm = new MusicLoadingForm(path);
+            DialogResult loadingFormDialogResult = loadingForm.ShowDialog(this);
+            if (loadingFormDialogResult == DialogResult.OK)
+            {
+                playlistGB.Enabled = true;
+                openFolderLLBL.Text = path;
+                PlaylistPlanner = loadingForm.PlaylistPlanner;
+                filesInfoLBL.Text = $"{PlaylistPlanner.GetCountOfLoadedFiles()} files | Min: " +
+                    RoundTimeSpanToSeconds(PlaylistPlanner.MinimumPlaylistDuration) +
+                    $" | Max: " + RoundTimeSpanToSeconds(PlaylistPlanner.MaximumPlaylistDuration);
             }
         }
 

@@ -61,6 +61,11 @@ namespace YonatanMankovich.PlaylistPlanner
                 {
                     unknownDurationFiles.Add(e.PathToMedia);
                 }
+                catch (ArgumentException e)
+                {
+                    if (!e.Message.Equals("An item with the same key has already been added."))
+                        throw e;
+                }
                 catch (Exception e)
                 {
                     throw e;
