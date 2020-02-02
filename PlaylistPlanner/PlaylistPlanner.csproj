@@ -6,6 +6,7 @@
     <RootNamespace>YonatanMankovich.PlaylistPlanner</RootNamespace>
     <Authors>Yonatan Mankovich</Authors>
     <Copyright>© 2020 Yonatan Mankovich</Copyright>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
