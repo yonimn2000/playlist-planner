@@ -14,3 +14,7 @@ A simple tool to create music playlists of exact durations.
 
 For example:
 `"Playlist Planner.exe" "C:\Users\Yonatan\Music" "02/02/2020 2:02:02 PM" -3` will generate a playlist and start playing it.
+
+## My Other Project That Uses This Library
+
+[Exact Music Player](https://github.com/yonimn2000/exact-music-player)
