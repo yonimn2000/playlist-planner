@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace YonatanMankovich.PlaylistPlanner
 {
@@ -90,6 +91,20 @@ namespace YonatanMankovich.PlaylistPlanner
         }
 
         /// <summary>
+        /// Removes a music file from the planner.
+        /// </summary>
+        /// <param name="file">A path to the music file.</param>
+        public void RemoveMusicFile(string file)
+        {
+            MusicFile musicFile = MusicFiles.Where(f => f.Path.Equals(file)).FirstOrDefault();
+            if (musicFile == null)
+                throw new KeyNotFoundException();
+            MusicFiles.Remove(musicFile);
+            MaximumPlaylistDuration -= musicFile.Duration;
+            MinimumPlaylistDuration = MusicFiles.Min(f => f.Duration);
+        }
+
+        /// <summary>
         /// Creates a playlist of a duration as close to the desired one as possible.
         /// </summary>
         /// <param name="duration">The desired duration of the playlist.</param>
@@ -139,7 +154,7 @@ namespace YonatanMankovich.PlaylistPlanner
                 && !IsTimeSpanWithinRange(playlist.Duration, duration, forgiveness))
             {
                 int randomIndex = Random.Next(musicFilesList.Count);
-                playlist.AddMusicFile(musicFilesList[randomIndex]);
+                playlist.EnqueueMusicFile(musicFilesList[randomIndex]);
                 musicFilesList.RemoveAt(randomIndex);
             }
             return playlist;
@@ -149,21 +164,14 @@ namespace YonatanMankovich.PlaylistPlanner
         /// Determines if the <paramref name="duration"/> and <paramref name="forgiveness"/>
         /// are within minimum and maximum possible playlist durations.
         /// </summary>
-        public bool IsPlaylistOfDurationPossible(TimeSpan duration, TimeSpan forgiveness = default)
-        {
-            return (duration - forgiveness > MinimumPlaylistDuration && duration + forgiveness < MaximumPlaylistDuration)
+        public bool IsPlaylistOfDurationPossible(TimeSpan duration, TimeSpan forgiveness = default) 
+            => (duration - forgiveness > MinimumPlaylistDuration && duration + forgiveness < MaximumPlaylistDuration)
                 || IsTimeSpanWithinRange(MinimumPlaylistDuration, duration, forgiveness)
                 || IsTimeSpanWithinRange(MaximumPlaylistDuration, duration, forgiveness);
-        }
 
-        private bool IsTimeSpanWithinRange(TimeSpan timeSpan, TimeSpan rangeBase, TimeSpan range)
-        {
-            return rangeBase - range <= timeSpan && timeSpan <= rangeBase + range;
-        }
+        private bool IsTimeSpanWithinRange(TimeSpan timeSpan, TimeSpan rangeBase, TimeSpan range) 
+            => rangeBase - range <= timeSpan && timeSpan <= rangeBase + range;
 
-        public int GetCountOfLoadedFiles()
-        {
-            return MusicFiles.Count;
-        }
+        public int CountOfLoadedFiles => MusicFiles.Count;
     }
 }

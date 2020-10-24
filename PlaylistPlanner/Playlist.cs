@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace YonatanMankovich.PlaylistPlanner
@@ -8,27 +9,26 @@ namespace YonatanMankovich.PlaylistPlanner
     public class Playlist
     {
         public TimeSpan Duration { get; private set; }
-        private List<MusicFile> MusicFiles { get; set; } = new List<MusicFile>();
+        private Queue<MusicFile> MusicFiles { get; set; } = new Queue<MusicFile>();
 
-        public void AddMusicFile(MusicFile musicFile)
+        public void EnqueueMusicFile(MusicFile musicFile)
         {
-            MusicFiles.Add(musicFile);
+            MusicFiles.Enqueue(musicFile);
             Duration += musicFile.Duration;
         }
 
-        public void RemoveMusicFile(MusicFile musicFile)
+        public MusicFile DequeueMusicFile()
         {
-            if (MusicFiles.Contains(musicFile))
+            if (MusicFiles.Count > 0)
             {
-                MusicFiles.Remove(musicFile);
+                MusicFile musicFile = MusicFiles.Dequeue();
                 Duration -= musicFile.Duration;
+                return new MusicFile(musicFile);
             }
+            throw new PlaylistEmptyException();
         }
 
-        public int GetSize()
-        {
-            return MusicFiles.Count;
-        }
+        public int Size => MusicFiles.Count;
 
         public IEnumerable<MusicFile> GetMusicFiles()
         {
@@ -53,18 +53,6 @@ namespace YonatanMankovich.PlaylistPlanner
             System.Diagnostics.Process.Start(fileName);
         }
 
-        public void Shuffle()
-        {
-            Random random = new Random();
-            int n = GetSize();
-            while (n > 1)
-            {
-                n--;
-                int k = random.Next(n + 1);
-                MusicFile value = MusicFiles[k];
-                MusicFiles[k] = MusicFiles[n];
-                MusicFiles[n] = value;
-            }
-        }
+        public void Shuffle() => MusicFiles = new Queue<MusicFile>(MusicFiles.OrderBy(f => new Guid()));
     }
 }

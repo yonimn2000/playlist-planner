@@ -45,7 +45,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
                 playlistGB.Enabled = true;
                 openFolderLLBL.Text = path;
                 PlaylistPlanner = loadingForm.PlaylistPlanner;
-                filesInfoLBL.Text = $"{PlaylistPlanner.GetCountOfLoadedFiles()} files | Min: " +
+                filesInfoLBL.Text = $"{PlaylistPlanner.CountOfLoadedFiles} files | Min: " +
                     RoundTimeSpanToSeconds(PlaylistPlanner.MinimumPlaylistDuration) +
                     $" | Max: " + RoundTimeSpanToSeconds(PlaylistPlanner.MaximumPlaylistDuration);
             }
@@ -58,7 +58,7 @@ namespace YonatanMankovich.PlaylistPlannerUI
                 Playlist = PlaylistPlanner.GetClosestPlaylistOfDuration(durationPicker.Value.TimeOfDay + TimeSpan.FromDays((double)daysNUD.Value));
                 RefreshFilesLB();
                 totalLengthLBL.Text = $"Total playlist duration: " +
-                $"{RoundTimeSpanToSeconds(Playlist.Duration)} ({Playlist.GetSize()} songs)";
+                $"{RoundTimeSpanToSeconds(Playlist.Duration)} ({Playlist.Size} songs)";
             });
         }
 

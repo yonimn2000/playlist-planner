@@ -25,4 +25,9 @@ namespace YonatanMankovich.PlaylistPlanner
             Forgiveness = forgiveness;
         }
     }
+
+    public class PlaylistEmptyException : InvalidOperationException
+    {
+        public PlaylistEmptyException() : base("The playlist is empty.") { }
+    }
 }

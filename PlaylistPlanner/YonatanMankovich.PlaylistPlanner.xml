@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YonatanMankovich.PlaylistPlanner</name>
+    </assembly>
+    <members>
+        <member name="F:YonatanMankovich.PlaylistPlanner.Planner.ReportProgressDelegate">
+            <summary>
+            Reports progress when loading multiple files.
+            </summary>
+        </member>
+        <member name="P:YonatanMankovich.PlaylistPlanner.Planner.MaximumPlaylistDuration">
+            <summary>
+            Gets the maximum possible playlist duration with the currently loaded files.
+            </summary>
+        </member>
+        <member name="P:YonatanMankovich.PlaylistPlanner.Planner.MinimumPlaylistDuration">
+            <summary>
+            Gets the minimum possible playlist duration with the currently loaded files.
+            </summary>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.AddMusicFilesFromDirectory(System.String,System.Boolean)">
+            <summary>
+            Adds music files from the specified directory and returns a list of files with unknown durations.
+            Invokes the ReportProgress delegate.
+            </summary>
+            <param name="directory">A path to a folder with music files.</param>
+            <param name="includeSubfolders">Specifies whether the program should include subfolders with music files.</param>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.AddMusicFiles(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            Adds music files from the specified collection of file paths and returns a list of files with unknown durations.
+            Invokes the ReportProgress delegate.
+            </summary>
+            <param name="files">A collection of music file paths.</param>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.AddMusicFile(System.String)">
+            <summary>
+            Adds a music file from the specified path.
+            Invokes the ReportProgress delegate.
+            </summary>
+            <param name="file">A path to a music file.</param>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.RemoveMusicFile(System.String)">
+            <summary>
+            Removes a music file from the planner.
+            </summary>
+            <param name="file">A path to the music file.</param>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.GetClosestPlaylistOfDuration(System.TimeSpan,System.UInt32)">
+            <summary>
+            Creates a playlist of a duration as close to the desired one as possible.
+            </summary>
+            <param name="duration">The desired duration of the playlist.</param>
+            <param name="tries">The number of tries the program should make. A higher number means greater accuracy.</param>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.GetPlaylistOfDuration(System.TimeSpan,System.TimeSpan,System.UInt32)">
+            <summary>
+            Creates a playlist of a desired duration or throws an <see cref="T:YonatanMankovich.PlaylistPlanner.UnforgivablePlaylistDurationException"/>.
+            </summary>
+            <param name="duration">The desired duration of the playlist.</param>
+            <param name="forgiveness">The accepted error of ± the <paramref name="duration"/>.</param>
+            <param name="tries">The number of tries the program should make before giving up.</param>
+            <returns></returns>
+        </member>
+        <member name="M:YonatanMankovich.PlaylistPlanner.Planner.IsPlaylistOfDurationPossible(System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Determines if the <paramref name="duration"/> and <paramref name="forgiveness"/>
+            are within minimum and maximum possible playlist durations.
+            </summary>
+        </member>
+    </members>
+</doc>

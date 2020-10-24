@@ -13,6 +13,8 @@ namespace YonatanMankovich.PlaylistPlanner
             Duration = duration;
         }
 
+        public MusicFile(MusicFile musicFile) : this(musicFile.Path, musicFile.Duration) { }
+
         public static TimeSpan GetDuration(string path)
         {
             object duration = Microsoft.WindowsAPICodePack.Shell.
